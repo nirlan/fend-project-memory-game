@@ -68,7 +68,9 @@ document.querySelector('.deck').addEventListener('click', function(event) {
 				match(openCards[openCards.length - 1], openCards[openCards.length - 2]);
 
 			} else {
-				noMatch(openCards[openCards.length - 1], openCards[openCards.length - 2]);
+				setTimeout (function() {
+					noMatch(openCards[openCards.length - 1], openCards[openCards.length - 2]);
+				}, 1000);
 			}
 		}
 	}
@@ -99,9 +101,8 @@ function match(...cards) {
 // Remove the cards from the list and hide the card symbol
 function noMatch(...cards) {
 
-	for (card of cards) {
-		card.classList.remove('open', 'show');
-		openCards.pop();
-	}
-
+		for (card of cards) {
+			card.classList.remove('open', 'show');
+			openCards.pop();
+		}
 }
