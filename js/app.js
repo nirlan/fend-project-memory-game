@@ -1,5 +1,5 @@
 /*
- * Create a list that holds all of your cards
+ * Create an array that holds all the cards
  */
  let cards = [...document.getElementsByClassName('card')];
 
@@ -13,6 +13,7 @@
  cards = shuffle(cards);
  display(cards);
 
+ // Append each card to a document fragment, then append the fragment to the parent node
  function display(cards) {
  	const fragment = document.createDocumentFragment();
  	const deck = document.querySelector('.deck');
@@ -41,7 +42,6 @@
  }
 
 
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -52,3 +52,24 @@
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+let openCards = [];
+
+document.querySelector('.deck').addEventListener('click', function(event) {
+	const evtTarget = event.target;
+
+	if (evtTarget.nodeName === 'LI') {
+		showCard(evtTarget);
+		addCard(evtTarget);
+	}
+});
+
+// Display the card symbol
+function showCard(target) {
+		target.classList.add('open');
+		target.classList.add('show');
+}
+
+// Add the card to a 'list' of 'open' cards
+function addCard(target) {
+		openCards.push(target);
+}
