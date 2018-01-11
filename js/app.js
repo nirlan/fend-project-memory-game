@@ -53,6 +53,7 @@
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
  let openCards = []; // An array to store the 'open' cards
+ let matchCount = 0;
 
  // Event listener attached to parent element (event delegation)
  document.querySelector('.deck').addEventListener('click', function(event) {
@@ -65,7 +66,12 @@
 		if (openCards.length > 1) {
 
 			if (openCards[openCards.length - 1].firstElementChild.classList.value === openCards[openCards.length - 2].firstElementChild.classList.value) {
+				matchCount++;
 				match(openCards[openCards.length - 1], openCards[openCards.length - 2]);
+
+				if (matchCount === 8) {
+					setTimeout (finalScore, 1000);
+				}
 
 			} else {
 				setTimeout (function() {
@@ -113,7 +119,12 @@
  let moveCount = 0; // Increase by one after each move (two cards open)
 
  // Increment the move counter and display it on the page
- function moveCounter () {
+ function moveCounter() {
  	moveCount++;
  	moveElement.textContent = moveCount;
+ }
+
+ // If all cards have matched, display a message with the final score
+ function finalScore() {
+ 	alert('You have won!');
  }
