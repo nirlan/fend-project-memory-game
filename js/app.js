@@ -54,22 +54,43 @@
  */
 let openCards = [];
 
+// Event listener attached to parent element (event delegation)
 document.querySelector('.deck').addEventListener('click', function(event) {
 	const evtTarget = event.target;
 
 	if (evtTarget.nodeName === 'LI') {
-		showCard(evtTarget);
-		addCard(evtTarget);
+			addCard(evtTarget);
+			showCard(evtTarget);
+
+		if (openCards.length > 1) {
+
+			if (openCards[openCards.length - 1].firstElementChild.classList.value === openCards[openCards.length - 2].firstElementChild.classList.value) {
+				match(openCards[openCards.length - 1], openCards[openCards.length - 2]);
+			}
+		}
 	}
 });
 
-// Display the card symbol
-function showCard(target) {
-		target.classList.add('open');
-		target.classList.add('show');
-}
-
 // Add the card to a 'list' of 'open' cards
 function addCard(target) {
+
+	if (target.classList.length < 2) {
 		openCards.push(target);
+	}
+}
+
+// Display the card symbol
+function showCard(target) {
+	target.classList.add('open');
+	target.classList.add('show');
+}
+
+// Test to see if two cards match
+function match(...cards) {
+	cards[0].classList.add('match');
+	cards[0].classList.remove('open');
+	cards[0].classList.remove('show');
+	cards[1].classList.add('match');
+	cards[1].classList.remove('open');
+	cards[1].classList.remove('show');
 }
