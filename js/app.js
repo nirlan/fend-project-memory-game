@@ -66,6 +66,9 @@ document.querySelector('.deck').addEventListener('click', function(event) {
 
 			if (openCards[openCards.length - 1].firstElementChild.classList.value === openCards[openCards.length - 2].firstElementChild.classList.value) {
 				match(openCards[openCards.length - 1], openCards[openCards.length - 2]);
+
+			} else {
+				noMatch(openCards[openCards.length - 1], openCards[openCards.length - 2]);
 			}
 		}
 	}
@@ -81,16 +84,24 @@ function addCard(target) {
 
 // Display the card symbol
 function showCard(target) {
-	target.classList.add('open');
-	target.classList.add('show');
+	target.classList.add('open', 'show');
 }
 
-// Test to see if two cards match
+// Lock the cards in the open position if they match
 function match(...cards) {
-	cards[0].classList.add('match');
-	cards[0].classList.remove('open');
-	cards[0].classList.remove('show');
-	cards[1].classList.add('match');
-	cards[1].classList.remove('open');
-	cards[1].classList.remove('show');
+
+	for (card of cards) {
+		card.classList.add('match');
+		card.classList.remove('open', 'show');
+	}
+}
+
+// Remove the cards from the list and hide the card symbol
+function noMatch(...cards) {
+
+	for (card of cards) {
+		card.classList.remove('open', 'show');
+		openCards.pop();
+	}
+
 }
