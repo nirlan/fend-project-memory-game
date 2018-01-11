@@ -52,11 +52,11 @@
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-let openCards = [];
+ let openCards = []; // An array to store the 'open' cards
 
-// Event listener attached to parent element (event delegation)
-document.querySelector('.deck').addEventListener('click', function(event) {
-	const evtTarget = event.target;
+ // Event listener attached to parent element (event delegation)
+ document.querySelector('.deck').addEventListener('click', function(event) {
+ 	const evtTarget = event.target;
 
 	if (evtTarget.nodeName === 'LI') {
 			addCard(evtTarget);
@@ -72,37 +72,48 @@ document.querySelector('.deck').addEventListener('click', function(event) {
 					noMatch(openCards[openCards.length - 1], openCards[openCards.length - 2]);
 				}, 1000);
 			}
+
+			moveCounter();
 		}
 	}
-});
+ });
 
-// Add the card to a 'list' of 'open' cards
-function addCard(target) {
+ // Add the card to a 'list' of 'open' cards
+ function addCard(target) {
 
 	if (target.classList.length < 2) {
 		openCards.push(target);
 	}
-}
+ }
 
-// Display the card symbol
-function showCard(target) {
+ // Display the card symbol
+ function showCard(target) {
 	target.classList.add('open', 'show');
-}
+ }
 
-// Lock the cards in the open position if they match
-function match(...cards) {
+ // Lock the cards in the open position if they match
+ function match(...cards) {
 
 	for (card of cards) {
 		card.classList.add('match');
 		card.classList.remove('open', 'show');
 	}
-}
+ }
 
-// Remove the cards from the list and hide the card symbol
-function noMatch(...cards) {
+ // Remove the cards from the list and hide the card symbol
+ function noMatch(...cards) {
 
 		for (card of cards) {
 			card.classList.remove('open', 'show');
 			openCards.pop();
 		}
-}
+ }
+
+ const moveElement = document.querySelector('.moves'); // Move counter element
+ let moveCount = 0; // Increase by one after each move (two cards open)
+
+ // Increment the move counter and display it on the page
+ function moveCounter () {
+ 	moveCount++;
+ 	moveElement.textContent = moveCount;
+ }
