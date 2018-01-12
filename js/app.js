@@ -124,6 +124,14 @@
  function moveCounter() {
  	moveCount++;
  	moveElement.textContent = moveCount;
+
+ 	switch (moveCount) {
+ 		case 10:
+ 			removeStar();
+ 			break;
+ 		case 15:
+ 			removeStar();
+ 	}
  }
 
  // If all cards have matched, display a message with the final score
@@ -144,4 +152,13 @@
  // Restart function - reload the page
  function restart() {
  	location.reload(true);
+ }
+
+ // Displays a star rating (from 1-3) that reflects the player's performance.
+ const stars = document.querySelector('.stars'); // Star list
+
+ // Remove stars after a number of moves
+ function removeStar() {
+ 	const star = stars.firstElementChild; // Get one star element
+ 	stars.removeChild(star);
  }
