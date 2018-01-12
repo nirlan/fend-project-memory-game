@@ -126,5 +126,7 @@
 
  // If all cards have matched, display a message with the final score
  function finalScore() {
- 	alert('You have won!');
+ 	const message = `You have won!
+ 	You made ${moveCount} moves`;
+ 	alert(message);
  }
