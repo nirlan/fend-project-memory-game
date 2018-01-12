@@ -53,13 +53,13 @@
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
  let openCards = []; // An array to store the 'open' cards
- let matchCount = 0;
+ let matchCount = 0; // Count the numbers of card pairs matched
 
  // Event listener attached to parent element (event delegation)
  document.querySelector('.deck').addEventListener('click', function(event) {
  	const evtTarget = event.target;
 
-	if (evtTarget.nodeName === 'LI') {
+	if (evtTarget.nodeName === 'LI' && openCards.length < 2) {
 			addCard(evtTarget);
 			showCard(evtTarget);
 
@@ -103,6 +103,7 @@
 	for (card of cards) {
 		card.classList.add('match');
 		card.classList.remove('open', 'show');
+		openCards = [];
 	}
  }
 
