@@ -54,9 +54,10 @@
  */
  let openCards = []; // An array to store the 'open' cards
  let matchCount = 0; // Count the numbers of card pairs matched
+ const deck = document.querySelector('.deck');
 
  // Event listener attached to parent element (event delegation)
- document.querySelector('.deck').addEventListener('click', function(event) {
+ deck.addEventListener('click', function(event) {
  	const evtTarget = event.target;
 
 	if (evtTarget.nodeName === 'LI' && openCards.length < 2) {
@@ -130,4 +131,17 @@
  	const message = `You have won!
  	You made ${moveCount} moves`;
  	alert(message);
+ }
+
+ // Add event listener to restart button:
+ // - reload the page when the button is clicked
+ const restartButton = document.querySelector('.restart'); // Restart button element
+
+ restartButton.addEventListener('click', function() {
+ 	restart();
+ });
+
+ // Restart function - reload the page
+ function restart() {
+ 	location.reload(true);
  }
