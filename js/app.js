@@ -64,14 +64,20 @@
 			addCard(evtTarget);
 			showCard(evtTarget);
 
+		// the timer starts when the first card is open
+		if (moveCount === 0) {
+			startTimer();
+		}
+
 		if (openCards.length > 1) {
 
 			if (openCards[openCards.length - 1].firstElementChild.classList.value === openCards[openCards.length - 2].firstElementChild.classList.value) {
 				matchCount++;
 				match(openCards[openCards.length - 1], openCards[openCards.length - 2]);
 
+				// when all the cards have matched, the timer stops and the final score pops up
 				if (matchCount === 8) {
-					setTimeout (finalScore, 1000);
+					setTimeout(finalScore, 1000);
 				}
 
 			} else {
@@ -126,11 +132,11 @@
  	moveElement.textContent = moveCount;
 
  	switch (moveCount) {
- 		case 10:
- 			removeStar();
+ 		case 16:
+ 			removeStar(); // Remove one start after sixteen moves
  			break;
- 		case 15:
- 			removeStar();
+ 		case 24:
+ 			removeStar(); // Remove another start after twenty four moves
  	}
  }
 
@@ -161,4 +167,29 @@
  function removeStar() {
  	const star = stars.firstElementChild; // Get one star element
  	stars.removeChild(star);
+ }
+
+ // Start a displayed timer when the player starts a game
+ const timeElement = document.querySelector('time');
+ let intervalId;
+
+ // Start timer function
+ function startTimer() {
+ 	let timeString = null;
+ 	let minutes = 0;
+ 	let seconds = 0;
+ 	intervalId = setInterval(myTimer, 1000); // Run this function each 1 second
+
+	// Displays the timer in 'MM:SS' format
+	function myTimer(){
+		seconds++;
+
+		if (seconds % 60 === 0) {
+			minutes++;
+			seconds = 0;
+		}
+
+		timeString = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+		timeElement.textContent = timeString;
+ 	}
  }
