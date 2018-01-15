@@ -21,7 +21,8 @@ body {
     font-family: 'Coda', cursive;
 }
 
-.container {
+.container,
+.game-board {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,4 +111,13 @@ h1 {
 
 .score-panel time {
     margin-left: 80px;
+}
+
+/*
+ * Hide SVG success icon
+ */
+
+
+svg {
+    display: none;
 }

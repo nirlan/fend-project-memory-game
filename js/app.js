@@ -129,6 +129,7 @@
 
  const moveElement = document.querySelector('.moves'); // Move counter element
  let moveCount = 0; // Increase by one after each move (two cards open)
+ let starCount = 3;
 
  // Increment the move counter and display it on the page
  function moveCounter() {
@@ -138,17 +139,50 @@
  	switch (moveCount) {
  		case 16:
  			removeStar(); // Remove one start after sixteen moves
+ 			starCount--;
  			break;
  		case 24:
  			removeStar(); // Remove another start after twenty four moves
+ 			starCount--;
  	}
  }
 
  // If all cards have matched, display a message with the final score
  function finalScore() {
- 	const message = `You have won!
- 	You made ${moveCount} moves`;
- 	alert(message);
+ 	//Get the container element and set margin-top
+ 	const mainContent = document.querySelector('.container');
+ 	mainContent.style.marginTop = '250px';
+
+ 	// Hide the game board when the game is finished
+ 	const gameBoard = document.querySelector('.game-board');
+ 	gameBoard.style.display = 'none';
+
+ 	// Create a document fragment to append the new elements of the final score panel
+ 	const fragment = document.createDocumentFragment();
+
+ 	// Create and set the new elements that will be appended to the fragment
+ 	const congratHeading = document.createElement('h1');
+ 	const congratText1 = document.createElement('p');
+ 	const congratText2 = document.createElement('p');
+ 	const congratText3 = document.createElement('p');
+ 	congratHeading.textContent = 'Congratulations! You Won!';
+ 	congratText1.textContent = `With ${moveCount} Moves and ${starCount} Stars.`;
+ 	congratText2.textContent = 'Woooooo!';
+ 	congratText3.textContent = `You took ${minutes !== 0 ? minutes + ' minutes and ' : ''}${seconds} seconds to win the game.`;
+
+ 	// Append the new elements to the fragment
+ 	fragment.appendChild(congratHeading);
+ 	fragment.appendChild(congratText1);
+ 	fragment.appendChild(congratText2);
+ 	fragment.appendChild(congratText3);
+
+ 	// Display the SVG success icon
+ 	const svgIcon = document.querySelector('svg');
+ 	svgIcon.style.display = 'block'
+
+ 	// Append the fragment to the 'mainContent' element
+ 	mainContent.appendChild(fragment);
+
  }
 
  // Add event listener to restart button:
@@ -176,12 +210,14 @@
  // Start a displayed timer when the player starts a game
  const timeElement = document.querySelector('time');
  let intervalId;
+ let minutes;
+ let seconds;
 
  // Start timer function
  function startTimer() {
  	let timeString = '';
- 	let minutes = 0;
- 	let seconds = 0;
+ 	minutes = 0;
+ 	seconds = 0;
  	intervalId = setInterval(myTimer, 1000); // Run this function each 1 second
 
 	// Displays the timer in 'MM:SS' format
