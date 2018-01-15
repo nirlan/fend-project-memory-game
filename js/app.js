@@ -54,6 +54,7 @@
  */
  let openCards = []; // An array to store the 'open' cards
  let matchCount = 0; // Count the numbers of card pairs matched
+ let firstClick = false; // Variable that checks if is the user's first card click
  const deck = document.querySelector('.deck');
 
  // Event listener attached to parent element (event delegation)
@@ -61,13 +62,15 @@
  	const evtTarget = event.target;
 
 	if (evtTarget.nodeName === 'LI' && openCards.length < 2) {
-			addCard(evtTarget);
-			showCard(evtTarget);
 
 		// the timer starts when the first card is open
-		if (moveCount === 0) {
+		if (firstClick === false) {
 			startTimer();
 		}
+
+		firstClick = true;
+		addCard(evtTarget);
+		showCard(evtTarget);
 
 		if (openCards.length > 1) {
 
@@ -77,6 +80,7 @@
 
 				// when all the cards have matched, the timer stops and the final score pops up
 				if (matchCount === 8) {
+					stopTimer();
 					setTimeout(finalScore, 1000);
 				}
 
@@ -175,7 +179,7 @@
 
  // Start timer function
  function startTimer() {
- 	let timeString = null;
+ 	let timeString = '';
  	let minutes = 0;
  	let seconds = 0;
  	intervalId = setInterval(myTimer, 1000); // Run this function each 1 second
@@ -192,4 +196,9 @@
 		timeString = `${minutes < 10 ? '0' : ''}${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 		timeElement.textContent = timeString;
  	}
+ }
+
+ // Stops timer when all cards have matched
+ function stopTimer() {
+ 	clearInterval(intervalId);
  }
