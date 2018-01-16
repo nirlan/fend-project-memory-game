@@ -160,6 +160,37 @@
  	// Create a document fragment to append the new elements of the final score panel
  	const fragment = document.createDocumentFragment();
 
+ 	// Create SVG success check mark on the fly
+ 	const svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); // Create a SVG element
+	svgNode.setAttributeNS(null, 'width', '200px');
+	svgNode.setAttributeNS(null, 'height', '200px');
+	svgNode.setAttributeNS(null, 'viewBox', '0 0 363.025 363.024');
+
+ 	const svgIcon1 = document.createElementNS('http://www.w3.org/2000/svg', 'path'); // Create a path in SVG namespace
+ 	svgIcon1.setAttributeNS(null, 'd', 'M181.512 363.024C81.43 363.024 0 281.601 0 181.513 0 81.424 81.43 0 181.512 0c100.083 0 181.513 81.424 181.513 181.513 0 100.088-81.43 181.511-181.513 181.511zm0-351.314C87.88 11.71 11.71 87.886 11.71 181.513s76.17 169.802 169.802 169.802c93.633 0 169.803-76.175 169.803-169.802S275.145 11.71 181.512 11.71z');
+	svgIcon1.setAttributeNS(null, 'fill', '#cffbc7');
+
+ 	const svgIcon2 = document.createElementNS('http://www.w3.org/2000/svg', 'path'); // Create a path in SVG namespace
+ 	svgIcon2.setAttributeNS(null, 'd', 'M147.957 258.935l-64.889-64.889 8.28-8.279 56.609 56.608 123.214-123.209 8.28 8.279z');
+ 	svgIcon2.setAttributeNS(null, 'fill', '#1ac550');
+
+ 	// Animate the SVG icon
+ 	const svgAnimate = document.createElementNS('http://www.w3.org/2000/svg', 'animateTransform'); // Create an animateTransform in SVG namespace
+ 	svgAnimate.setAttributeNS(null, 'attributeName', 'transform');
+ 	svgAnimate.setAttributeNS(null, 'type', 'scale');
+ 	svgAnimate.setAttributeNS(null, 'additive', 'sum');
+ 	svgAnimate.setAttributeNS(null, 'from', '0 0');
+ 	svgAnimate.setAttributeNS(null, 'to', '1 1');
+ 	svgAnimate.setAttributeNS(null, 'begin', '0s');
+ 	svgAnimate.setAttributeNS(null, 'dur', '0.15s');
+ 	svgAnimate.setAttributeNS(null, 'repeatCount', '1');
+
+ 	// Add the new SVG icon to the DOM
+ 	svgNode.appendChild(svgAnimate);
+ 	svgNode.appendChild(svgIcon1);
+ 	svgNode.appendChild(svgIcon2);
+ 	document.querySelector('.container').appendChild(svgNode);
+
  	// Create and set the new elements that will be appended to the fragment
  	const congratHeading = document.createElement('h1');
  	const congratText1 = document.createElement('p');
