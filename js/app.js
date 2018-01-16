@@ -157,9 +157,6 @@
  	const gameBoard = document.querySelector('.game-board');
  	gameBoard.style.display = 'none';
 
- 	// Create a document fragment to append the new elements of the final score panel
- 	const fragment = document.createDocumentFragment();
-
  	// Create SVG success check mark on the fly
  	const svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); // Create a SVG element
 	svgNode.setAttributeNS(null, 'width', '200px');
@@ -191,7 +188,11 @@
  	svgNode.appendChild(svgIcon2);
  	document.querySelector('.container').appendChild(svgNode);
 
- 	// Create and set the new elements that will be appended to the fragment
+
+ 	// Create a document fragment to append the new elements of the final score panel
+ 	const fragment = document.createDocumentFragment();
+
+ 	// Create and set the new text elements that will be appended to the fragment
  	const congratHeading = document.createElement('h1');
  	const congratText1 = document.createElement('p');
  	const congratText2 = document.createElement('p');
@@ -201,11 +202,19 @@
  	congratText2.textContent = 'Woooooo!';
  	congratText3.textContent = `You took ${minutes !== 0 ? minutes + ' minutes and ' : ''}${seconds} seconds to win the game.`;
 
+ 	// Create the 'play again' button
+ 	const buttonPlayAgain = document.createElement('button');
+ 	buttonPlayAgain.setAttribute('type', 'button');
+ 	buttonPlayAgain.setAttribute('onclick', 'restart()');
+ 	buttonPlayAgain.setAttribute('class', 'play-again-button');
+ 	buttonPlayAgain.textContent = 'Play again!';
+
  	// Append the new elements to the fragment
  	fragment.appendChild(congratHeading);
  	fragment.appendChild(congratText1);
  	fragment.appendChild(congratText2);
  	fragment.appendChild(congratText3);
+ 	fragment.appendChild(buttonPlayAgain);
 
  	// Display the SVG success icon
  	const svgIcon = document.querySelector('svg');
@@ -213,7 +222,6 @@
 
  	// Append the fragment to the 'mainContent' element
  	mainContent.appendChild(fragment);
-
  }
 
  // Add event listener to restart button:

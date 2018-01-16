@@ -121,3 +121,20 @@ h1 {
 svg {
     display: none;
 }
+
+/*
+ * Play again button styling
+ */
+
+ .play-again-button {
+    font-size: 1.5rem;
+    width: 250px;
+    margin-top: 20px;
+    line-height: 48px;
+    text-align: center;
+    background-color: #2dc0bf;
+    color: #fff;
+    cursor: pointer;
+    border-style: none;
+    border-radius: 10px;
+ }
