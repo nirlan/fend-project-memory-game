@@ -100,7 +100,9 @@
 
  // Add the card to a 'list' of 'open' cards
  function addCard(target) {
+ 	target.classList.remove('close'); // Remove 'close' class if it exists
 
+ 	// Prevent already 'open' cards from being added incorrectly to the openCards array
 	if (target.classList.length < 2) {
 		openCards.push(target);
 	}
@@ -108,18 +110,20 @@
 
  // Display the card symbol
  function showCard(target) {
+
+ 	// Prevents the second 'open' card from flipping to open
  	if (openCards.length < 2) {
  		target.classList.add('show', 'open');
  	}
  }
 
- // Lock the cards in the open position if they match
+ // Lock the cards in the 'open' position if they match
  function match(...cards) {
 
 	for (card of cards) {
 		card.classList.remove('open');
 		card.classList.add('show', 'match');
-		openCards = [];
+		openCards.pop();
 	}
  }
 
@@ -132,11 +136,12 @@
  	}
  }
 
- // Remove the cards from the list and hide the card symbol
+ // Remove the cards from the array, hide the card
  function closeCards(...cards) {
 
 		for (card of cards) {
 			card.classList.remove('show', 'no-match');
+			card.classList.add('close'); // Make the card flip to close
 			openCards.pop();
 		}
  }
