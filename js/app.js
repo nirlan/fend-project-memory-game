@@ -54,7 +54,7 @@
  */
  let openCards = []; // An array to store the 'open' cards
  let matchCount = 0; // Count the numbers of card pairs matched
- let firstClick = false; // Variable that checks if is the user's first card click
+ let firstClick = true; // Variable that checks if is the user's first card click
  const deck = document.querySelector('.deck');
 
  // Event listener attached to parent element (event delegation)
@@ -64,11 +64,11 @@
 	if (evtTarget.nodeName === 'LI' && openCards.length < 2) {
 
 		// the timer starts when the first card is open
-		if (firstClick === false) {
+		if (firstClick === true) {
 			startTimer();
 		}
 
-		firstClick = true;
+		firstClick = false;
 		addCard(evtTarget);
 		showCard(evtTarget);
 
@@ -105,7 +105,9 @@
 
  // Display the card symbol
  function showCard(target) {
-	target.classList.add('open', 'show');
+ 	if (openCards.length < 2) {
+ 		target.classList.add('show', 'open');
+ 	}
  }
 
  // Lock the cards in the open position if they match
