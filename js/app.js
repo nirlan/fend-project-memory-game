@@ -74,6 +74,7 @@
 
 		if (openCards.length > 1) {
 
+			// If the cards match
 			if (openCards[openCards.length - 1].firstElementChild.classList.value === openCards[openCards.length - 2].firstElementChild.classList.value) {
 				matchCount++;
 				match(openCards[openCards.length - 1], openCards[openCards.length - 2]);
@@ -84,9 +85,11 @@
 					setTimeout(finalScore, 1000);
 				}
 
+			// No match condition
 			} else {
+				noMatch(openCards[openCards.length - 1], openCards[openCards.length - 2]);
 				setTimeout (function() {
-					noMatch(openCards[openCards.length - 1], openCards[openCards.length - 2]);
+					closeCards(openCards[openCards.length - 1], openCards[openCards.length - 2]);
 				}, 1000);
 			}
 
@@ -114,17 +117,26 @@
  function match(...cards) {
 
 	for (card of cards) {
-		card.classList.add('match');
-		card.classList.remove('open', 'show');
+		card.classList.remove('open');
+		card.classList.add('show', 'match');
 		openCards = [];
 	}
  }
 
- // Remove the cards from the list and hide the card symbol
+ //Triggers no match animation
  function noMatch(...cards) {
 
+ 	for (card of cards) {
+ 		card.classList.remove('open');
+ 		card.classList.add('show', 'no-match');
+ 	}
+ }
+
+ // Remove the cards from the list and hide the card symbol
+ function closeCards(...cards) {
+
 		for (card of cards) {
-			card.classList.remove('open', 'show');
+			card.classList.remove('show', 'no-match');
 			openCards.pop();
 		}
  }
