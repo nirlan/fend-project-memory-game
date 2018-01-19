@@ -170,7 +170,6 @@
  function finalScore() {
  	//Get the container element and set margin-top
  	const mainContent = document.querySelector('.container');
- 	mainContent.style.marginTop = '250px';
 
  	// Hide the game board when the game is finished
  	const gameBoard = document.querySelector('.game-board');
