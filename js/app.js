@@ -170,6 +170,7 @@
  function finalScore() {
  	//Get the container element and set margin-top
  	const mainContent = document.querySelector('.container');
+ 	mainContent.style.height = '100%';
 
  	// Hide the game board when the game is finished
  	const gameBoard = document.querySelector('.game-board');
@@ -177,8 +178,8 @@
 
  	// Create SVG success check mark on the fly
  	const svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); // Create a SVG element
-	svgNode.setAttributeNS(null, 'width', '200px');
-	svgNode.setAttributeNS(null, 'height', '200px');
+	svgNode.setAttributeNS(null, 'width', '12.5rem');
+	svgNode.setAttributeNS(null, 'height', '12.5rem');
 	svgNode.setAttributeNS(null, 'viewBox', '0 0 363.025 363.024');
 
  	const svgIcon1 = document.createElementNS('http://www.w3.org/2000/svg', 'path'); // Create a path in SVG namespace
@@ -211,7 +212,7 @@
  	const fragment = document.createDocumentFragment();
 
  	// Create and set the new text elements that will be appended to the fragment
- 	const congratHeading = document.createElement('h1');
+ 	const congratHeading = document.createElement('h2');
  	const congratText1 = document.createElement('p');
  	const congratText2 = document.createElement('p');
  	const congratText3 = document.createElement('p');
