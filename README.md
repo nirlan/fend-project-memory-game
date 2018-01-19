@@ -11,17 +11,17 @@ The memory game consists on flipping and matching all the turned-down cards. Eac
 
 ## Getting Started
 
-To play the game, just clone the GitHub repository and open `index.html` on the browser.
+To play the game, just clone the GitHub repository and open `index.html` in the browser.
 ```
 $ git clone https://github.com/nirlan/fend-project-memory-game.git
 $ cd fend-project-memory-game
 $ google-chrome index.html
 ```
-The game is fully responsive, so it should work fine on any modern smartphone, tablet or desktop.
 
 ## Support
 
-The game has been tested in _Google Chrome Version 63.0.3239.132 (Official Build) (64-bit)_ and _Firefox Quantum 57.0.4 (64-bit)_.
+* The game has been tested in _Google Chrome Version 63.0.3239.132 (Official Build) (64-bit)_ and _Firefox Quantum 57.0.4 (64-bit)_.
+* The game is intended to be fully responsive, so it should work fine on any modern smartphone, tablet or desktop.
 
 
 ## Contributing
